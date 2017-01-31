@@ -1,4 +1,4 @@
-/*! echo-js v1.7.3 | (c) 2016 @toddmotto | https://github.com/toddmotto/echo */
+/*! echo-js v1.7.3 | (c) 2017 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
@@ -9,7 +9,17 @@
   } else {
     root.echo = factory(root);
   }
-})(this, function (root) {
+})(function () {
+	try {
+		return Function('return this')();
+	}
+	catch (err) {
+		// Content Security Policy can prevent evaluating
+		// strings as JavaScript in browsers, where we can
+		// assume we have the window object.
+		return window;
+	}
+}(), function (root) {
 
   'use strict';
 
@@ -22,7 +32,7 @@
   var isHidden = function (element) {
     return (element.offsetParent === null);
   };
-  
+
   var inView = function (element, view) {
     if (isHidden(element)) {
       return false;

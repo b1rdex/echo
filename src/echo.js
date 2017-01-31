@@ -8,7 +8,17 @@
   } else {
     root.echo = factory(root);
   }
-})(this, function (root) {
+})(function () {
+	try {
+		return Function('return this')();
+	}
+	catch (err) {
+		// Content Security Policy can prevent evaluating
+		// strings as JavaScript in browsers, where we can
+		// assume we have the window object.
+		return window;
+	}
+}(), function (root) {
 
   'use strict';
 
@@ -21,7 +31,7 @@
   var isHidden = function (element) {
     return (element.offsetParent === null);
   };
-  
+
   var inView = function (element, view) {
     if (isHidden(element)) {
       return false;
