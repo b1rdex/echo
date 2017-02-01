@@ -1,0 +1,13 @@
+node_modules
+src
+test
+
+.editorconfig
+.gitignore
+.jshintrc
+.spmignore
+.travis.yml
+bower.json
+gulpfile.js
+license.
+yarn.lock
