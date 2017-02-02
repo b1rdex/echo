@@ -101,6 +101,17 @@ echo.init({
 });
 ```
 
+#### container
+Type: `Object` Default: `null`
+
+This allows you to specify a different container than the default 'document'.
+
+```js
+echo.init({
+  container: document.querySelector(".main")
+});
+```
+
 ## .render()
 
 Echo's callback `render()` can be used to make Echo poll your images when you're not scrolling, for instance if you've got a filter layout that swaps images but does not scroll, you need to call the internal functions without scrolling. Use `render()` for this:
