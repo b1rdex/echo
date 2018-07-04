@@ -1,4 +1,4 @@
-/*! echo-js v1.7.3 | (c) 2017 @toddmotto | https://github.com/toddmotto/echo */
+/*! echo-js v1.8.0 | (c) 2018 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
@@ -9,17 +9,18 @@
   } else {
     root.echo = factory(root);
   }
-})(function () {
-	try {
-		return Function('return this')();
-	}
-	catch (err) {
-		// Content Security Policy can prevent evaluating
-		// strings as JavaScript in browsers, where we can
-		// assume we have the window object.
-		return window;
-	}
-}(), function (root) {
+})((function () {
+  // Copied from https://github.com/mholt/PapaParse/pull/365
+  // alternative method, similar to `Function('return this')()`
+  // but without using `eval` (which is disabled when
+  // using Content Security Policy).
+
+  if (typeof self !== 'undefined') { return self; }
+  if (typeof window !== 'undefined') { return window; }
+  if (typeof global !== 'undefined') { return global; }
+
+  throw new Error('Cannot determine global object');
+})(), function (root) {
 
   'use strict';
 
